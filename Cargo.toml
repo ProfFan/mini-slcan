@@ -1,11 +1,14 @@
 [package]
-name = "mini-slcan"
-version = "0.1.1"
-authors = ["Jonas Schievink <jonasschievink@gmail.com>"]
+name = "mini-slcan-ng"
+version = "0.2.0"
+authors = [
+    "Fan Jiang <i@fanjiang.me>",
+    "Jonas Schievink <jonasschievink@gmail.com>",
+]
 edition = "2018"
 description = "Serial Line CAN (SLCAN) protocol decoder/encoder"
-documentation = "https://docs.rs/mini-slcan/"
-repository = "https://github.com/jonas-schievink/mini-slcan.git"
+documentation = "https://docs.rs/mini-slcan-ng/"
+repository = "https://github.com/ProfFan/mini-slcan.git"
 keywords = ["canusb", "usbcan", "codec"]
 categories = ["no-std", "embedded"]
 readme = "README.md"
@@ -42,7 +45,7 @@ replace = """
 
 No changes.
 
-## [{{version}} - {{date}}](https://github.com/jonas-schievink/mini-slcan/releases/tag/v{{version}})
+## [{{version}} - {{date}}](https://github.com/ProfFan/mini-slcan/releases/tag/v{{version}})
 """
 
 # Bump the version inside the example manifest in `README.md`
@@ -54,5 +57,5 @@ replace = 'mini-slcan = "{{version}}"'
 # Bump the version referenced by the `html_root_url` attribute in `lib.rs`
 [[package.metadata.release.pre-release-replacements]]
 file = "src/lib.rs"
-search = "https://docs.rs/mini-slcan/[a-z0-9\\.-]+"
-replace = "https://docs.rs/mini-slcan/{{version}}"
+search = "https://docs.rs/mini-slcan-ng/[a-z0-9\\.-]+"
+replace = "https://docs.rs/mini-slcan-ng/{{version}}"
