@@ -79,7 +79,7 @@ impl Response {
             }
             Response::Status(flags) => {
                 writer.write(b'F')?;
-                writer.write_hex_u8(flags.bits().into())?;
+                writer.write_hex_u8(flags.bits())?;
                 writer.write(b'\r')?;
             }
             Response::Version {
@@ -87,8 +87,8 @@ impl Response {
                 software_version,
             } => {
                 writer.write(b'V')?;
-                writer.write_hex_u8((*hardware_version).into())?;
-                writer.write_hex_u8((*software_version).into())?;
+                writer.write_hex_u8(*hardware_version)?;
+                writer.write_hex_u8(*software_version)?;
                 writer.write(b'\r')?;
             }
             Response::Serial(serial) => {
@@ -208,7 +208,7 @@ struct Writer<'a> {
 
 impl<'a> Writer<'a> {
     fn write(&mut self, byte: u8) -> Result<(), Error> {
-        let buf = mem::replace(&mut self.buf, &mut []);
+        let buf = mem::take(&mut self.buf);
         match buf {
             [] => Err(Error::eof()),
             [b, rest @ ..] => {
@@ -236,7 +236,7 @@ impl<'a> Writer<'a> {
     }
 
     fn write_ext_identifier(&mut self, id: ExtIdentifier) -> Result<(), Error> {
-        self.write_hex(id.as_raw().into(), 8)
+        self.write_hex(id.as_raw(), 8)
     }
 
     fn write_frame(&mut self, frame: &CanFrame) -> Result<(), Error> {

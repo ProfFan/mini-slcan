@@ -15,8 +15,8 @@ license = "0BSD"
 maintenance = { status = "actively-developed" }
 
 [dependencies]
-bitflags = "1.2.1"
-defmt = "0.1.0"
+bitflags = "2.6.*"
+defmt = "0.3.*"
 
 [features]
 defmt-default = []
@@ -35,8 +35,8 @@ pre-release-commit-message = "Release {{version}}"
 # Change the changelog's `Unreleased` section to refer to this release and
 # prepend a new `Unreleased` section
 [[package.metadata.release.pre-release-replacements]]
-file    = "CHANGELOG.md"
-search  = "## Unreleased\n"
+file = "CHANGELOG.md"
+search = "## Unreleased\n"
 replace = """
 ## Unreleased
 
@@ -47,12 +47,12 @@ No changes.
 
 # Bump the version inside the example manifest in `README.md`
 [[package.metadata.release.pre-release-replacements]]
-file    = "README.md"
-search  = 'mini-slcan = "[a-z0-9\\.-]+"'
+file = "README.md"
+search = 'mini-slcan = "[a-z0-9\\.-]+"'
 replace = 'mini-slcan = "{{version}}"'
 
 # Bump the version referenced by the `html_root_url` attribute in `lib.rs`
 [[package.metadata.release.pre-release-replacements]]
-file    = "src/lib.rs"
-search  = "https://docs.rs/mini-slcan/[a-z0-9\\.-]+"
+file = "src/lib.rs"
+search = "https://docs.rs/mini-slcan/[a-z0-9\\.-]+"
 replace = "https://docs.rs/mini-slcan/{{version}}"

@@ -47,9 +47,8 @@ impl Bitrate {
     }
 }
 
-bitflags::bitflags! {
+defmt::bitflags! {
     /// Status flags reported by an SLCAN device.
-    #[derive(Format)]
     pub struct Status: u8 {
         const RX_FIFO_FULL = 1 << 0;
         const TX_FIFO_FULL = 1 << 1;
@@ -88,6 +87,8 @@ impl SerialNumber {
             let serial_number_contain_non_alphanumeric_characters = ();
 
             #[allow(unconditional_panic)]
+            #[allow(clippy::out_of_bounds_indexing)]
+            #[allow(clippy::no_effect)]
             [serial_number_contain_non_alphanumeric_characters][1];
         }
 
@@ -115,6 +116,11 @@ impl CanFrame {
     #[inline]
     pub fn len(&self) -> usize {
         self.len.into()
+    }
+
+    #[inline]
+    pub fn is_empty(&self) -> bool {
+        self.len() == 0
     }
 
     #[inline]
@@ -156,7 +162,7 @@ impl DerefMut for CanFrame {
 }
 
 impl Format for CanFrame {
-    fn format(&self, fmt: &mut defmt::Formatter) {
+    fn format(&self, fmt: defmt::Formatter<'_>) {
         self.data().format(fmt)
     }
 }
